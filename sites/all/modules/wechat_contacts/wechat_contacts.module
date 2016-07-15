@@ -15,15 +15,51 @@ function wechat_contacts_menu() {
     'page callback' => 'wechat_contacts_callback',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
-    'file' => 'inc/wechat_contacts.inc',
-  );
-
-  $items['my_contacts'] = array(
-    'title' => 'my contacts',
-    'page callback' => 'wechat_contacts_my_contacts',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-    'file' => 'inc/wechat_contacts.inc',
   );
   return $items;
+}
+
+function wechat_contacts_callback(){
+  $we_obj = _wechat_contacts_init_obj();
+  watchdog('zero', '2', array(), WATCHDOG_ERROR);
+  $we_obj->valid();
+  watchdog('zero', '3', array(), WATCHDOG_ERROR);
+  $type = $we_obj->getRev()->getRevType();
+  watchdog('zero', '4', array(), WATCHDOG_ERROR);
+  $request_data = $we_obj->getRevData();
+  if ($request_data['MsgType'] == "click") {
+    switch ($request_data['EventKey']) {
+      case 'contacts_list':
+        module_load_include('inc', 'wechat_contacts', 'inc/wechat_contacts_list');
+        return TRUE;
+        break;
+      case 'my_contact':
+        module_load_include('inc', 'wechat_contacts', 'inc/wechat_contacts_my');
+        return TRUE;
+        break;
+      case 'birth_list':
+        module_load_include('inc', 'wechat_contacts', 'inc/wechat_contacts_birth');
+        return TRUE;
+        break;
+      default:
+        return TRUE;
+        break;
+    } 
+  }
+}
+
+function _wechat_contacts_init_obj() {
+  $we_obj = &drupal_static(__FUNCTION__);
+  if (!isset($we_obj)) {
+    module_load_include('php', 'wechat_contacts', 'sdk/qywechat.class');
+    $options = array(
+      'token' => variable_get('wechat_token', "hackathon"),
+      'appid' => variable_get('wechat_appid', "wx2ef8799c2a79ecae"),
+      'appsecret' => variable_get('wechat_appsecret', "JuB2C5V7U1jytolYZHorPxzW-U1VSIy3x4sgFFF_OuqYx-KI5jP-F2YoYgsQW06l"),
+      'encodingaeskey' => '1pj2XNHL8mj8xqTQmLJafQ2Yl4tV1NPTIFXFc3MwFA2',
+      
+    );
+    $we_obj = new Wechat($options);
+  }
+  return $we_obj;
 }
