@@ -1,6 +1,5 @@
 <?php
 function wechat_contacts_callback(){
-  watchdog('error', $_GET["echostr"]);
   $we_obj = _wechat_contacts_init_obj();
   $we_obj->valid();
   $type = $we_obj->getRev()->getRevType();
