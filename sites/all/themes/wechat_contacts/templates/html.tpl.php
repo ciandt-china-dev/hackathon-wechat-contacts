@@ -6,6 +6,9 @@
     <?php print $scripts; ?>
   </head>
   <body>
-    Theme test.
+    <form>
+      <div>XXX</div>
+      <input type="text" />
+    </form>
   </body>
 </html>

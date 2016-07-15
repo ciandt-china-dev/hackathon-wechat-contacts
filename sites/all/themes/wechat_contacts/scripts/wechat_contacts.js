@@ -1,0 +1,6 @@
+wechatContacts = {};
+(function($) {
+  $(function() {
+    
+  });
+}(jQuery));
