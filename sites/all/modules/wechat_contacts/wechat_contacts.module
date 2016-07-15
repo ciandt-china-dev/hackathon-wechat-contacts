@@ -17,5 +17,13 @@ function wechat_contacts_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'inc/wechat_contacts.inc',
   );
+
+  $items['my_contacts'] = array(
+    'title' => 'my contacts',
+    'page callback' => 'wechat_contacts_my_contacts',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'inc/wechat_contacts.inc',
+  );
   return $items;
 }

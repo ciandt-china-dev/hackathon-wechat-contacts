@@ -3,13 +3,20 @@ function wechat_contacts_callback(){
   watchdog('error', $_GET["echostr"]);
   $we_obj = _wechat_contacts_init_obj();
   $we_obj->valid();
-  //$type = $we_obj->getRev()->getRevType();
-  //$request_data = $we_obj->getRevData();
-  //watchdog('wechat', '123');
+  $type = $we_obj->getRev()->getRevType();
+  $request_data = $we_obj->getRevData();
+  watchdog('wechat', $request_data);
   //$request_message = wechat_build_request_message($request_data);
   //watchdog('wechat', '123456'); 
   //$response_message = wechat_build_response_message($request_message);
   //$response_message->send();
+}
+function wechat_contacts_my_contacts(){
+  $access_token_object = file_get_contents("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wx2ef8799c2a79ecae&corpsecret=JuB2C5V7U1jytolYZHorPxzW-U1VSIy3x4sgFFF_OuqYx-KI5jP-F2YoYgsQW06l");
+  $access_token = $access_token_object->access_token;
+  $code = $_GET['code'];
+  $user_info = file_get_contents("https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=".$access_token."&code=".$code);
+  print_r($user_info);
 }
 
 function _wechat_contacts_init_obj() {
