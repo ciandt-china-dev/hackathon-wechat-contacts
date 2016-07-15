@@ -14,7 +14,7 @@ function wechat_contacts_callback(){
 function _wechat_contacts_init_obj() {
   $we_obj = &drupal_static(__FUNCTION__);
   if (!isset($we_obj)) {
-    module_load_include('php', 'wechat_contacts', 'sdk/wechat.class');
+    module_load_include('php', 'wechat_contacts', 'sdk/qywechat.class');
     $options = array(
       'token' => variable_get('wechat_token', "hackathon"),
       'appid' => variable_get('wechat_appid', "wx2ef8799c2a79ecae"),
