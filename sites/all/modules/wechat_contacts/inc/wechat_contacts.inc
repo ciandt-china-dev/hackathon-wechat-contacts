@@ -20,6 +20,8 @@ function _wechat_contacts_init_obj() {
       'token' => variable_get('wechat_token', "hackathon"),
       'appid' => variable_get('wechat_appid', "wx2ef8799c2a79ecae"),
       'appsecret' => variable_get('wechat_appsecret', "JuB2C5V7U1jytolYZHorPxzW-U1VSIy3x4sgFFF_OuqYx-KI5jP-F2YoYgsQW06l"),
+      'encodingaeskey' => '1pj2XNHL8mj8xqTQmLJafQ2Yl4tV1NPTIFXFc3MwFA2',
+      
     );
     $we_obj = new Wechat($options);
   }
