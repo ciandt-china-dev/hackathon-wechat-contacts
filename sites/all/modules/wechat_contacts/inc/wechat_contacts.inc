@@ -1,8 +1,13 @@
 <?php
 function wechat_contacts_callback(){
+	watchdog('zero', '1', array(), WATCHDOG_ERROR);
+	
   $we_obj = _wechat_contacts_init_obj();
+watchdog('zero', '2', array(), WATCHDOG_ERROR);
   $we_obj->valid();
+  watchdog('zero', '3', array(), WATCHDOG_ERROR);
   $type = $we_obj->getRev()->getRevType();
+  watchdog('zero', '4', array(), WATCHDOG_ERROR);
   $request_data = $we_obj->getRevData();
 
 watchdog('request_data', '<pre>$i</pre>', array('$i' => print_r($request_data, TRUE)), WATCHDOG_ERROR);
