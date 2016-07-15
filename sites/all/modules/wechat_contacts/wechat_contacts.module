@@ -16,39 +16,55 @@ function wechat_contacts_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['wechat_contacts_list'] = array(
+    'title' => 'wechat contacts list',
+    'description' => 'wechat contacts callback',
+    'page callback' => 'wechat_contacts_list',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'inc/wechat_contacts_list.inc',
+  );
+  $items['wechat_contacts_my_info'] = array(
+    'title' => 'wechat contacts my info',
+    'description' => 'wechat contacts callback',
+    'page callback' => 'wechat_contacts_my_info',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'inc/wechat_contacts_my_info.inc',
+  );
+  $items['wechat_contacts_birth'] = array(
+    'title' => 'wechat contacts birth',
+    'description' => 'wechat contacts callback',
+    'page callback' => 'wechat_contacts_birth',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'inc/wechat_contacts_birth.inc',
+  );
   return $items;
 }
 
-function wechat_contacts_callback(){
-  $we_obj = _wechat_contacts_init_obj();
-  watchdog('zero', '2', array(), WATCHDOG_ERROR);
+function wechat_contacts_theme() {
+  return array(
+    'wechat_contacts_list' => array(
+      'arguments' => array('title' => NULL, 'teaser' => NULL, 'link' => NULL), //
+      'template' => 'hot_news',
+      'file' => 'wechat_contacts_list.inc',
+      'path' =>drupal_get_path('module', 'wechat_contacts'),
+    ),
+    'wechat_contacts_list' => array(
+      'arguments' => array('title' => NULL, 'teaser' => NULL, 'link' => NULL), //
+      'template' => 'hot_news',
+      'file' => 'wechat_contacts_list.inc',
+      'path' =>drupal_get_path('module', 'wechat_contacts'),
+    ),
+)
+
+function wechat_contacts_callback() {
+  $we_obj = wechat_contacts_init_obj();
   $we_obj->valid();
-  watchdog('zero', '3', array(), WATCHDOG_ERROR);
-  $type = $we_obj->getRev()->getRevType();
-  watchdog('zero', '4', array(), WATCHDOG_ERROR);
-  $request_data = $we_obj->getRevData();
-  if ($request_data['MsgType'] == "click") {
-    switch ($request_data['EventKey']) {
-      case 'contacts_list':
-        module_load_include('inc', 'wechat_contacts', 'inc/wechat_contacts_list');
-        return TRUE;
-        break;
-      case 'my_contact':
-        module_load_include('inc', 'wechat_contacts', 'inc/wechat_contacts_my');
-        return TRUE;
-        break;
-      case 'birth_list':
-        module_load_include('inc', 'wechat_contacts', 'inc/wechat_contacts_birth');
-        return TRUE;
-        break;
-      default:
-        return TRUE;
-        break;
-    } 
-  }
 }
 
-function _wechat_contacts_init_obj() {
+function wechat_contacts_init_obj() {
   $we_obj = &drupal_static(__FUNCTION__);
   if (!isset($we_obj)) {
     module_load_include('php', 'wechat_contacts', 'sdk/qywechat.class');
