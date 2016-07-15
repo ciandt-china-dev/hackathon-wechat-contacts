@@ -57,7 +57,8 @@ function wechat_contacts_theme() {
       'file' => 'wechat_contacts_list.inc',
       'path' =>drupal_get_path('module', 'wechat_contacts'),
     ),
-)
+  );
+}
 
 function wechat_contacts_callback() {
   $we_obj = wechat_contacts_init_obj();
