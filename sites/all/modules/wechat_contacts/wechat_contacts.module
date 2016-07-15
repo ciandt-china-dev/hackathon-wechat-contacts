@@ -9,5 +9,13 @@
  * Implements hook_menu().
  */
 function wechat_contacts_menu() {
+  $items['wechat'] = array(
+    'title' => 'wechat contacts',
+    'description' => 'wechat contacts callback',
+    'page callback' => 'wechat_contacts_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'inc/wechat_contacts.inc',
+  );
   return $items;
 }
