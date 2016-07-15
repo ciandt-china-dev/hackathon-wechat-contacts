@@ -6,7 +6,7 @@ session_start();
   // $user_info_object = json_decode($user_info_object);
   // $UserId = $user_info_object->UserId;
   // print_r($UserId);
-}
+
 function wechat_contacts_my_info(){
   $we_obj = wechat_contacts_init_obj();
   echo "token";
