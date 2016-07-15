@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Implementation of plupload.module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function wechat_contacts_menu() {
+  return $items;
+}

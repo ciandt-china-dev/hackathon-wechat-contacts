@@ -1,0 +1,4 @@
+CHANGELOG for wechat_contacts integration for Drupal 7
+
+wechat_contacts integration 7.x-1.0
+=================================

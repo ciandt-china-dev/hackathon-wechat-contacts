@@ -1,0 +1,11 @@
+name = Wechat Contacts
+description = Provides a wechat contacts feature.
+files[] = wechat_contacts.module
+core = 7.x
+package = Wechat
+
+; Information added by Drupal.org packaging script on 2016-07-15
+version = "7.x-1.0"
+core = "7.x"
+project = "wechat_contacts"
+
